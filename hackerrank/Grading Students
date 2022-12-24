@@ -1,0 +1,11 @@
+def gradingStudents(grades):
+    finalResult = []
+    for i in grades:
+        if i < 38:
+            finalResult.append(i)
+        elif i%5 > 2:
+            i = i+(5-(i%5))
+            finalResult.append(i)
+        else:
+            finalResult.append(i)
+    return finalResult
