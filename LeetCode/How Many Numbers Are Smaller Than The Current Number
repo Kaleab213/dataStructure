@@ -1,4 +1,5 @@
-def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
+class solutions:
+     def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
         sortedArray = sorted(nums)
         dic = {}
         newArray = []
