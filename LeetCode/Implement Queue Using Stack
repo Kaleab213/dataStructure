@@ -1,0 +1,28 @@
+class MyQueue:
+
+    def __init__(self):
+        self.inputStack = []
+        self.outputStack = []
+    def push(self, x: int) -> None:
+        self.inputStack.append(x)
+    def pop(self) -> int:
+        if self.outputStack:
+            return self.outputStack.pop()
+        else:
+            for i in reversed(self.inputStack):
+                self.outputStack.append(i)
+                self.inputStack.pop()
+            return self.outputStack.pop()
+    def peek(self) -> int:
+        if self.outputStack:
+            return self.outputStack[-1]
+        else:
+            for i in reversed(self.inputStack):
+                self.outputStack.append(i)
+                self.inputStack.pop()
+            return self.outputStack[-1]
+    def empty(self) -> bool:
+        if not self.inputStack and not self.outputStack:
+            return True
+        else:
+            return False
