@@ -1,0 +1,6 @@
+class Solution(object):
+    def deleteNode(self, node):
+        tempo = node.next
+        node.val = tempo.val
+        node.next = node.next.next
+        tempo.next = None
