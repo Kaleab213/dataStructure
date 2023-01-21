@@ -1,0 +1,24 @@
+class Solution(object): 
+    def minSetSize(self, arr):
+        arr.sort()
+        newArray = []
+        val = 0 
+        for i in range(len(arr)):
+            if i == 0:
+                val += 1
+            else:
+                if arr[i] == arr[i-1]:
+                    val += 1
+                else:
+                    newArray.append(val)
+                    val = 1
+            if i == len(arr) - 1:
+                newArray.append(val)
+        sum = len(arr)
+        newArray.sort()
+        ans = 0
+        while sum > len(arr)//2 and newArray:
+            sum -= newArray[-1]
+            newArray.pop()
+            ans+=1 
+        return ans
