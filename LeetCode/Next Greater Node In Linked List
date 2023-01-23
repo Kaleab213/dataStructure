@@ -1,0 +1,21 @@
+class Solution(object):
+    def nextLargerNodes(self, head):
+        array = []
+        stack = []
+        index = 0
+        while head:
+            array.append(head.val)
+            if not stack:
+                stack.append([index, head.val])
+            else:
+                while stack and stack[-1][1] < head.val:
+                    tempIndex = stack[-1][0]
+                    value = stack[-1][1]
+                    stack.pop()
+                    array[tempIndex] = head.val
+                stack.append([index, head.val])
+            head = head.next 
+            index += 1 
+        for i in stack:
+            array[i[0]] = 0
+        return array
