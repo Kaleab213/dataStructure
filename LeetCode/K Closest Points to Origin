@@ -1,0 +1,14 @@
+class Solution(object):
+    def kClosest(self, points, k):
+        array = []
+        ans = []
+        index = 0
+        for i in points:
+            value = math.sqrt((i[0]**2) + (i[1]**2))
+            array.append([value, index])
+            index += 1
+        array.sort()
+        for i in range(k):
+            index = array[i][1]
+            ans.append(points[index])
+        return ans
