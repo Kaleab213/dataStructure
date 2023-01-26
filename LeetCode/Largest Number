@@ -1,0 +1,27 @@
+class Solution(object):
+    def largestNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: str
+        """
+        nums=[str(i) for i in nums]
+        build=''
+        while nums:
+            curmax=''
+            for i in nums:
+                if not curmax:
+                    curmax=i
+                else:
+                    catc=curmax+i
+                    cati=i+curmax
+                    if cati>catc:
+                        curmax=i
+            build+=curmax
+            nums.remove(curmax)
+        ind=0
+        while ind<len(build) and build[ind]=='0':
+            ind+=1
+        build=build[ind:]
+        if not build:
+            return '0'
+        return build
