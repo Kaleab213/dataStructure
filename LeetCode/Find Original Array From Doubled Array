@@ -1,0 +1,28 @@
+class Solution:
+	def findOriginalArray(self, changed: List[int]) -> List[int]:
+		if len(changed) % 2 != 0:
+			return None
+		cnt = Counter(changed)
+		minHeap = []
+		for k in cnt:
+			heappush(minHeap, k)
+		res = []
+		while cnt:
+			cur = heappop(minHeap)
+			if cur == 0:
+				if cnt[cur] % 2 != 0:
+					return None
+				else:
+					res += [cur] * (cnt[cur] // 2)
+					del cnt[cur]
+			else:                
+				if cur in cnt:
+					double = cur * 2
+					if double not in cnt or cnt[double] < cnt[cur]:
+						return None
+					res += [cur] * cnt[cur]
+					cnt[double] -= cnt[cur]
+					if cnt[double] == 0:
+						del cnt[double]
+					del cnt[cur]
+		return res
