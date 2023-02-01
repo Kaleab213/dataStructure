@@ -1,0 +1,17 @@
+class Solution:
+    def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
+        q = len(l)
+        ans = []
+        for i in range(q):
+            arr = sorted(nums[l[i]:r[i]+1])
+            arithmetic = True
+            last = arr[0]
+            dif = arr[1] - arr[0]
+            for val in arr:
+                if val == arr[0]: continue
+                if val - last != dif:
+                    arithmetic = False
+                    break
+                last = val
+            ans.append(arithmetic)
+        return ans
