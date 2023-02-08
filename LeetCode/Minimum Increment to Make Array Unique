@@ -1,0 +1,14 @@
+class Solution(object):
+    def minIncrementForUnique(self, A):
+        if not A:
+            return 0
+        A = sorted(A)
+        peek = A[0]
+        moves = 0
+        for i in xrange(1,len(A)):
+            diff = peek - A[i]
+            peek = A[i]
+            if diff >= 0:
+                moves += diff + 1
+                peek += diff + 1
+        return moves
