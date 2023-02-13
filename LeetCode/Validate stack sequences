@@ -1,31 +1,12 @@
 class Solution:
-    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
-        counti = countj = 0
-        length = len(pushed)
-        ans = list()
-        while counti < length and countj < length:
-            if pushed[counti] == popped[countj]:
-                counti += 1
-                countj += 1
-                continue
-            if len(ans) > 0:
-                if popped[countj] == ans[-1]:
-                    ans.pop()
-                    countj += 1
-                    continue
-            if (pushed[counti] != popped[countj]):
-                ans.append(pushed[counti])
-                counti += 1
-                continue
-        if len(ans) != 0:
-            if countj < length:
-                limit = length - countj
-                i = 0
-                while i < limit:
-                    if popped[countj] == ans[-1]:
-                        ans.pop()
-                        countj += 1
-                    i += 1
-                if len(ans) != 0:
-                    return False
-        return True
+    def validateStackSequences(self, push_sequence, pop_sequence):
+        temporary_stack = []
+        push_index, pop_index = 0, 0
+        while push_index < len(push_sequence):
+            temporary_stack.append(push_sequence[push_index])
+            push_index += 1
+            while temporary_stack and pop_index < len(pop_sequence) and temporary_stack[-1] == pop_sequence[pop_index]:
+                temporary_stack.pop()
+                pop_index += 1
+        return pop_index == len(pop_sequence)
+    
