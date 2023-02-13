@@ -1,25 +1,25 @@
 class Solution:
-    def evalRPN(self, tokens: List[str]) -> int:
-        def fun(st,n1,n2):
-            s1,s2=1,1
-            if n1<0:
-                s1=-1
-            if n2<0:
-                s2=-1
-            if st=='+':
-                return n1+n2
-            elif st=='-':
-                return n1-n2
-            elif st=='*':
-                return n1*n2
-            elif st=='/':
-                return floor(abs(n1)/abs(n2))*(s1*s2)
-        digits=[]
-        for i in tokens:
-            if i.isdigit() or (len(i)>1):
-                digits.append(int(i))
+    def evalRPN(self, expression: List[str]) -> int:
+        def calculate(operator, operand1, operand2):
+            sign1, sign2 = 1, 1
+            if operand1 < 0:
+                sign1 = -1
+            if operand2 < 0:
+                sign2 = -1
+            if operator == '+':
+                return operand1 + operand2
+            elif operator == '-':
+                return operand1 - operand2
+            elif operator == '*':
+                return operand1 * operand2
+            elif operator == '/':
+                return floor(abs(operand1) / abs(operand2)) * (sign1 * sign2)
+        numbers = []
+        for token in expression:
+            if token.isdigit() or (len(token) > 1):
+                numbers.append(int(token))
             else:
-                n1=digits.pop()
-                n2=digits.pop()
-                digits.append(fun(i,n2,n1))
-        return digits[0]
+                op1 = numbers.pop()
+                op2 = numbers.pop()
+                numbers.append(calculate(token, op2, op1))
+        return numbers[0]
