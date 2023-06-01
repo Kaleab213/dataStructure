@@ -1,0 +1,35 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        string1 = ""
+        string2 = ""
+        string1 += str(l1.val)
+        string2 += str(l2.val)
+        while l1.next:
+            l1 = l1.next
+            string1 += str(l1.val)
+        while l2.next:
+            l2 = l2.next
+            string2 += str(l2.val)
+        string1 = string1[::-1]
+        string2 = string2[::-1]
+        string1 = int(string1)
+        string2 = int(string2)
+        result = string1 + string2
+        result = str(result)
+        result = result[::-1] 
+        l3 = ListNode(int(result[0]))
+        current = l3
+        for i in range(1, len(result)):
+            new_node = ListNode(int(result[i]))
+            current.next = new_node
+            current = new_node
+        return l3
+
+
+
+
