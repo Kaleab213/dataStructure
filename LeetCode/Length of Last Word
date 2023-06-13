@@ -1,0 +1,19 @@
+import re
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+
+        array = []
+        stri = ""
+        started = False
+        for i in s:
+            if i == " " and not started:
+                continue
+            elif i == " " and len(stri) > 0:
+                array.append(stri)
+                stri = ""
+            elif i != " ":
+                started = True
+                stri += i
+        if len(stri) > 0:
+            return(len(stri))
+        return(len(array[-1]))
