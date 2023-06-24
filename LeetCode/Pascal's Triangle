@@ -1,0 +1,25 @@
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+
+        if numRows == 1:
+            return [[1]]
+
+        def rec(index):
+
+            if index == 2:
+                return [[1], [1,1]]
+
+            output = rec(index -1)
+            array = output[-1]
+            value = []
+            for i in range(len(array)-1):
+                value.append(array[i] + array[i+1])
+            value = value[::-1]
+            result = [1,1]
+            for i in value:
+                result.insert(1, i)
+            output.append(result)
+            return output
+        return rec(numRows)
+
+            
