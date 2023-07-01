@@ -1,0 +1,31 @@
+def mergesort():
+    a = list(map(int, input().split()))
+    n,m = a[0], a[1]
+    arr1 = list(map(int, input().split()))
+    arr2 = list(map(int, input().split()))
+    
+    first=0
+    second=0
+    output = []
+    res = 0
+    
+    while first < n and second < m:
+        
+        if arr1[first] < arr2[second]:
+            output.append(arr1[first])
+            first+=1
+        else:
+            output.append(arr2[second])
+            second+=1
+    while first < n:
+        output.append(arr1[first])
+        first+=1
+    while second < m:
+        output.append(arr2[second])
+        second+=1
+    return output
+answ = mergesort()
+for i in answ:
+    print(i)
+#1 2 3 6 8 9 13 13 15 18 18 21 25 
+
