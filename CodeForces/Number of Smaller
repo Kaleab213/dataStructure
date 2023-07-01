@@ -1,1 +1,31 @@
-xxx
+def lessthan():
+    a = list(map(int, input().split()))
+    n,m = a[0], a[1]
+    arr1 = list(map(int, input().split()))
+    arr2 = list(map(int, input().split()))
+    
+    first=0
+    second=0
+    output = []
+    res = 0
+    
+    while second < m and first < n:
+        if first == n - 1:
+            if arr1[first] < arr2[second]:
+                output.append(res+1)
+            else:
+                output.append(res)
+            second+=1
+        elif arr1[first] < arr2[second]:
+            res += 1
+            first += 1
+        else:
+            output.append(res)
+            second += 1
+        
+    return output
+answ = lessthan()
+for i in answ:
+    print(i)
+# 1 1 2 3 4 6 6 
+
