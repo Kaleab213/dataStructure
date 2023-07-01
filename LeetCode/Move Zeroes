@@ -1,7 +1,16 @@
-def moveZeroes(self, nums: List[int]) -> None:
-        zero = 0
-        for i in range(len(nums)):
-            if nums[i] != 0 and nums[zero]==0:
-                nums[i],nums[zero]=nums[zero],nums[i]
-            if nums[zero]!=0:
-                zero+=1
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        place = 0
+        find = 0
+        
+        while find < len(nums):
+            if nums[find] != 0:
+                val = nums.pop(find)
+                nums.insert(place,  val)
+                place += 1
+            find+=1
+
+
