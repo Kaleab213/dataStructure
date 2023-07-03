@@ -1,0 +1,23 @@
+def subsequence():
+    
+    t = int(input())
+    for _ in range(t):
+        
+        n = int(input())
+        a = list(map(int, input().split()))
+        
+        if n==1:
+            print(a[0])
+            continue
+            
+        first = 0
+        output = 0
+        
+        for second in range(len(a)):
+            if a[second] > 0 and a[first] < 0 or a[second] < 0 and a[first] > 0:
+                output+=max(a[first:second])
+                first = second
+        output += max(a[first:])
+        print(output)
+    
+subsequence()
