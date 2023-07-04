@@ -1,0 +1,13 @@
+class Solution:
+    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
+        trainers.sort()
+        players.sort()
+        trainer = len(trainers)-1
+        count = 0
+        for player in players[::-1]:
+            if trainer < 0:
+                break
+            if player <= trainers[trainer]:
+                count+=1
+                trainer -= 1
+        return count
