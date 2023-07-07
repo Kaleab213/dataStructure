@@ -1,0 +1,35 @@
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        stack = []
+        i = 0
+        while i < len(path):
+            j = i + 1
+            if path[i] == "/":
+                while j < len(path) and path[j] == "/":
+                    j += 1
+                tempo = ""
+                while j < len(path) and path[j]!="/":
+                    tempo += path[j]
+                    j += 1
+                if tempo == "..":
+                    if len(stack) > 1:
+                        if stack[-1] != "/":
+                            stack.pop()
+                            if len(stack) > 1:
+                                stack.pop()
+                elif tempo != ".":
+                    if len(tempo)>0:
+                        if stack:
+                            if stack[-1] != "/":
+                                stack.append("/")
+                        else:
+                            stack.append("/")
+                        stack.append(tempo)
+            i = j
+        if not stack:
+            return "/"
+        output = ""
+        for i in stack:
+            output+=i
+        return output
+
