@@ -1,0 +1,29 @@
+class DataStream:
+
+    def __init__(self, value: int, k: int):
+        self.value = value
+        self.k = k
+        self.que = [] 
+        self.gtracker = 0
+        self.btracker = 0
+    def consec(self, num: int) -> bool:
+        self.que.append(num)
+        if num != self.value:
+            self.btracker += 1
+        else:
+            self.gtracker += 1
+        if self.btracker+self.gtracker > self.k:
+            popped = self.que.pop(0)
+            if popped == self.value:
+                self.gtracker-=1
+            else:
+                self.btracker-=1
+        if self.gtracker+self.btracker < self.k:
+            return False
+        if self.btracker > 0:
+            return False
+        return True    
+
+# Your DataStream object will be instantiated and called as such:
+# obj = DataStream(value, k)
+# param_1 = obj.consec(num)
