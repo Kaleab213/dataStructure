@@ -1,0 +1,16 @@
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        combined = []
+        for p,s in zip(position, speed):
+            combined.append((p,s))
+        combined.sort()
+        n = len(combined)
+        slowest = float('-inf')
+        for i in range(n-1, -1, -1):
+            (p,s) = combined[i] 
+            time = (target-p)/s
+            if time <= slowest:
+                combined.pop(i)
+            else:
+                slowest = time
+        return len(combined)
