@@ -7,4 +7,5 @@ class Solution(object):
             piles.pop(-1)
             piles.pop(-2)
             piles.pop(0)
+
         return value
