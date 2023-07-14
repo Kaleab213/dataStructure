@@ -1,0 +1,21 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        freq_dict = {}
+        for num in nums:
+            freq_dict[num]=freq_dict.get(num, 0)+1
+        def backtrack(perm, visited):
+            if len(perm) == len(nums):
+                res.append(perm.copy())
+                return
+            for num in freq_dict:
+                if visited.get(num, 0) >= freq_dict[num]:
+                    continue
+                visited[num] = visited.get(num, 0) + 1
+                perm.append(num)
+                backtrack(perm, visited)
+                visited[num] -= 1
+                perm.pop()
+        visited = {}
+        backtrack([], visited)
+        return res
