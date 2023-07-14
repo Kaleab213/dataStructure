@@ -19,4 +19,5 @@ class Solution:
                     triplets.add((firstNum , secondNum ,thirdNum))
                     j += 1
                     k -= 1
+
         return triplets
