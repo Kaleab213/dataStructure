@@ -1,0 +1,22 @@
+class Solution:
+    def maximumRequests(self, n: int, requests: List[List[int]]) -> int:
+        self.res = 0
+        def backtracker(tempo, idx, balance):
+            if idx == len(requests):
+                for i in range(n):
+                    if balance[i] != 0:
+                        return
+                self.res = max(self.res, tempo)
+                return
+            
+            balance[requests[idx][0]]-=1
+            balance[requests[idx][1]]+=1
+            backtracker(tempo+1, idx+1, balance)
+
+            balance[requests[idx][0]]+=1
+            balance[requests[idx][1]]-=1
+            backtracker(tempo, idx+1, balance)
+
+        backtracker(0, 0, [0]*n)
+        return self.res
+
