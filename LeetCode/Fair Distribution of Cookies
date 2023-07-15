@@ -1,0 +1,16 @@
+class Solution:
+    def distributeCookies(self, cookies: List[int], k: int) -> int:
+        val = float('inf')
+        bucket = [0]*k
+        def backtracking(idx):
+            nonlocal bucket, val
+            if idx == len(cookies):
+                val=min(val, max(bucket))
+                return
+            if val <= max(bucket): return
+            for i in range(k):    
+                bucket[i]+=cookies[idx]
+                backtracking(idx+1)
+                bucket[i]-=cookies[idx]
+        backtracking(0)
+        return val
