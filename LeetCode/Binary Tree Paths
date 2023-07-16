@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        if not root.val:
+            return []
+        res = []
+        def backtracking(path, curr_node):
+            if len(path) > 0:
+                path+="->"
+            path+=str(curr_node.val)
+
+            if not curr_node.left and not curr_node.right:
+                res.append(path)
+                return
+
+            if curr_node.left:
+                backtracking(path, curr_node.left)
+
+            if curr_node.right:
+                backtracking(path, curr_node.right)
+
+        backtracking("", root)
+        return res
