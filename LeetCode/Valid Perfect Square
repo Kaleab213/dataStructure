@@ -1,0 +1,13 @@
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        left = 1
+        right = num
+        while left <= right:
+            val = (left + right)//2
+            if val*val == num:
+                return True
+            elif val*val > num:
+                right = val-1
+            else:
+                left = val+1
+        return False
