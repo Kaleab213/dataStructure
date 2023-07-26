@@ -16,16 +16,17 @@ class Solution:
 
         while queue:
             tempo = []
+            prev = None
             for _ in range(len(queue)):
                 curr = queue.popleft()
-                if queue:
-                    curr.next = queue[0]
+                if prev:
+                    prev.next = curr
+                prev = curr
 
                 if curr.left:
-                    tempo.append(curr.left)
+                    queue.append(curr.left)
                 if curr.right:
-                    tempo.append(curr.right)
-
-            queue+=tempo
+                    queue.append(curr.right)
 
         return root
+        
