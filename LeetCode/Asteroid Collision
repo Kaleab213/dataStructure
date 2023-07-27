@@ -1,0 +1,10 @@
+def asteroidCollision(asteroids):
+    stack = []
+    for asteroid in asteroids:
+        while stack and asteroid < 0 and stack[-1] > 0 and abs(asteroid) > stack[-1]:
+            stack.pop()
+        if not stack or asteroid > 0 or stack[-1] < 0:
+            stack.append(asteroid)
+        elif asteroid < 0 and stack[-1] == abs(asteroid):
+            stack.pop()
+    return stack
