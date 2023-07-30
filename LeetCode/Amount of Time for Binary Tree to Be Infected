@@ -1,0 +1,42 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def create_adjacency_list(self, root):
+        adjacency_list = {}
+        queue = deque([(root, None)])
+
+        while queue:
+            node, parent = queue.popleft()
+            if node:
+                adjacency_list.setdefault(node.val, set())
+                if parent:
+                    adjacency_list[node.val].add(parent.val)
+                    adjacency_list[parent.val].add(node.val)
+                queue.append((node.left, node))
+                queue.append((node.right, node))
+
+        return adjacency_list
+
+    def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
+
+        adjacency_list = self.create_adjacency_list(root)
+
+        queue = deque([(start, 0)])
+        visited = set()
+        max_distance = 0
+
+        while queue:
+            node, distance = queue.popleft()
+            visited.add(node)
+            max_distance = max(max_distance, distance)
+
+            for neighbor in adjacency_list[node]:
+                if neighbor not in visited:
+                    queue.append((neighbor, distance + 1))
+
+        return max_distance
