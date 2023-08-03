@@ -1,0 +1,23 @@
+class Solution:
+    def largestInteger(self, nums: int) -> int:
+        nums = str(nums)
+        n = len(nums)
+        odds = []
+        evens = []
+        for i in range(n):
+            val = int(nums[i])
+            if val%2 == 0:
+                evens.append(-val)
+            else:
+                odds.append(-val)
+        res = ""
+        heapq.heapify(odds)
+        heapq.heapify(evens)
+        for i in range(n):
+            val = int(nums[i])
+            if val%2==0:
+                res+= str(-(heapq.heappop(evens)))
+            else:
+                res+= str(-(heapq.heappop(odds)))
+        return int(res)
+        
