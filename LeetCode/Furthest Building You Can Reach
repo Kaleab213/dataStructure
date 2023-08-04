@@ -7,8 +7,9 @@ class Solution:
             if val > 0:
                 heapq.heappush(store, val)
                 if len(store) > ladders:
-                    bricks -= heapq.heappop(store)
-                if bricks < 0:
-                    return i
+                    val = heapq.heappop(store)
+                    if val > bricks:
+                        return i
+                    bricks -= val
         return len(heights) - 1
                
