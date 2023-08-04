@@ -1,0 +1,14 @@
+class Solution:
+    def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        res=[]
+        for i in mat:
+            heapq.heapify(i)
+            while i and i[0]!=1:
+                heapq.heappop(i)
+        for i in range(len(mat)):
+            res.append((len(mat[i]), i))
+        res.sort()
+        output = []
+        for i in range(k):
+            output.append(res[i][1])
+        return output
