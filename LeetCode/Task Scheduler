@@ -1,0 +1,22 @@
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        dict = {}
+        for i in tasks:
+            dict[i] = dict.get(i, 0)+1
+        todo = []
+        for i in dict:
+            todo.append((-dict[i], i))
+        heapq.heapify(todo)
+        time = 0
+        waitlist = deque()
+        while todo or waitlist:
+            if waitlist and waitlist[0][0] == time:
+                val = waitlist.popleft()
+                heapq.heappush(todo, val[1])
+            if todo:
+                c, val = heapq.heappop(todo)
+                c+=1
+                if c != 0:
+                    waitlist.append([time+n+1, (c, val)])
+            time += 1
+        return time
