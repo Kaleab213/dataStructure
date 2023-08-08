@@ -1,0 +1,27 @@
+class Solution:
+    def totalCost(self, costs: List[int], k: int, candidates: int) -> int:
+        start = 0
+        end = len(costs) - 1
+        sec1 = []
+        sec2 = []
+        res = 0
+
+        for _ in range(k):
+            while len(sec1) < candidates and start <= end:
+                heapq.heappush(sec1, costs[start])
+                start += 1
+            while len(sec2) < candidates and start <= end:
+                heapq.heappush(sec2, costs[end])
+                end -= 1
+
+            val1 = sec1[0] if sec1 else float('inf')
+            val2 = sec2[0] if sec2 else float('inf')
+
+            if val1 <= val2:
+                res += val1
+                heapq.heappop(sec1)
+            else:
+                res += val2
+                heapq.heappop(sec2)
+
+        return res
