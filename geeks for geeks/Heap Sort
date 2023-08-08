@@ -1,0 +1,10 @@
+import heapq
+class Solution:
+    def HeapSort(self, arr, n):
+        sorted_arr = []
+        heapq.heapify(arr)
+        while arr:
+            val = heapq.heappop(arr)
+            sorted_arr.append(val)
+        for i in sorted_arr:
+            arr.append(i)
