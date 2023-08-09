@@ -1,0 +1,33 @@
+class Solution:
+    def videoStitching(self, clips: List[List[int]], time: int) -> int:
+        n = len(clips)
+        array = []
+        clips.sort()
+        j = 0
+        while j < n:
+            if not array:
+                left = clips[j][0] 
+                if left > 0:
+                    return -1
+                right = clips[j][1]
+                while j < n and clips[j][0] == left:
+                    right = max(right, clips[j][1])
+                    j += 1
+                array.append([left, right])
+            else:
+                left = clips[j][0]
+                right = clips[j][1]
+                while j < n and clips[j][0] <= array[-1][1]:
+                    if clips[j][1] > right:
+                        left = clips[j][0]
+                        right = clips[j][1]
+                    j += 1
+                if left > array[-1][1] or right <= array[-1][1]:
+                    return -1
+                array.append([left, right])
+            if array[-1][1] >= time:
+                break
+        if array[-1][1] < time:
+            return -1
+        return len(array)
+                
