@@ -1,0 +1,18 @@
+class Solution:
+    def totalSteps(self, nums: List[int]) -> int:  
+        st = [[nums[0], 0]]
+        ans = 0
+        
+        for i in nums[1:]:
+            t = 0
+            while st and st[-1][0] <= i:
+                t = max(t, st[-1][1])
+                st.pop()
+            if st: 
+                t += 1
+            else:
+                t = 0
+            ans = max(ans, t)
+            st.append([i, t])
+            
+        return ans
