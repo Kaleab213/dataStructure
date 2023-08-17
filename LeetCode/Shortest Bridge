@@ -1,0 +1,41 @@
+class Solution:
+    def shortestBridge(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        direction = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        visited = set()
+
+        def invalid(r, c):
+            return r<0 or c<0 or r==n or c==n
+
+        def dfs(r, c):
+            stack = [(r,c)]
+            while stack:
+                curr, curc = stack.pop()
+                visited.add((curr,curc))
+                for i, j in direction:
+                    row, col = curr+i, curc+j
+                    if (row, col) not in visited and not invalid(row, col) and grid[row][col]:
+                        stack.append((row, col))
+
+        def bfs():
+            res = 0
+            while queue:
+                for _ in range(len(queue)):
+                    r, c = queue.popleft()
+                    for i,j in direction:
+                        row, col = r+i, c+j
+                        if  not invalid(row, col):
+                            if (row, col) not in visited:
+                                if grid[row][col]: return res
+                                queue.append((row, col))
+                                visited.add((row,col))
+                res += 1
+
+        for r in range(len(grid)):
+            for c in range(len(grid)):
+                if grid[r][c]:
+                    dfs(r,c)
+                    queue = deque(visited)
+                    return bfs()
+
+
