@@ -1,0 +1,27 @@
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        n  = len(grid)
+        direction = [(0, 1),(0, -1),(1, 0),(-1, 0), (1, 1), (-1, -1), (-1, 1), (1, -1)]
+
+        def invalid(r, c):
+            return r<0 or c<0 or r>=n or c>=n
+        
+        queue = deque()
+        if not grid[0][0]:
+            queue.append((0, 0))
+        visited = set([0, 0])
+        res = 0
+
+        while queue:
+            res+=1
+            for _ in range(len(queue)):
+                r, c = queue.popleft()
+                if r == n-1 and c == n-1:
+                    return res
+                for i,j in direction:
+                    row, col = r+i, c+j
+                    if not invalid(row, col) and (row, col) not in visited and not grid[row][col] :
+                        queue.append((row, col))
+                        visited.add((row, col))
+        return -1
+        
