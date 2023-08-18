@@ -1,0 +1,18 @@
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+        graph = {}
+        for r in roads:
+            val1, val2 = graph.get(r[0], set([])), graph.get(r[1], set([]))
+            val1.add(r[1]), val2.add(r[0])
+            graph[r[0]], graph[r[1]] = val1, val2
+ 
+        res = 0
+        for node1 in graph:
+            for node2 in graph:
+                if node1 != node2:
+                    val = len(graph[node1]) + len(graph[node2])
+                    if node2 in graph[node1]:
+                        val -= 1
+                    res = max(res, val)
+
+        return res
