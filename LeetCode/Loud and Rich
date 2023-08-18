@@ -1,0 +1,19 @@
+class Solution:
+    def loudAndRich(self, richer: List[List[int]], quiet: List[int]) -> List[int]:
+        n = len(quiet)
+        answer = list(range(n))
+        graph = [[] for _ in range(n)]
+        for u, v in richer:
+            graph[v].append(u)
+
+        def dfs(node):
+            if answer[node] == node:
+                for neighbor in graph[node]:
+                    if quiet[dfs(neighbor)] < quiet[answer[node]]:
+                        answer[node] = answer[neighbor]
+            return answer[node]
+
+        for i in range(n):
+            dfs(i)
+        
+        return answer
