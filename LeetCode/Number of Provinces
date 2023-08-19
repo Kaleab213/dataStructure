@@ -1,0 +1,31 @@
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        n = len(isConnected)
+        graph = {}
+        for i in range(n):
+            graph[i] = set()
+
+        for r in range(n):
+            for c in range(n):
+                if r != c and isConnected[r][c]:
+                    graph[r].add(c)
+                    graph[c].add(r)
+
+        res = 0
+        while graph:
+            stack = []
+            for i in graph:
+                stack.append(i)
+                break
+            visited = set()
+            while stack:
+                curr = stack.pop()
+                if curr not in visited:
+                    visited.add(curr)
+                    for neighbor in graph[curr]:
+                        if neighbor not in visited:
+                            stack.append(neighbor)
+                    del graph[curr]
+            res += 1
+
+        return res
