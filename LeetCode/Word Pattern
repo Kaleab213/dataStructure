@@ -1,0 +1,19 @@
+class Solution:
+    def wordPattern(self, s: str, pattern: str) -> bool:
+        n = len(s)
+        pattern = pattern.split()
+        if n != len(pattern):
+            return False
+
+        dict = {}
+        taken = set()
+        for i in range(n):
+            if s[i] in dict and pattern[i] != dict[s[i]]:
+                return False
+            elif s[i] not in dict:
+                if pattern[i] in taken:
+                    return False
+                dict[s[i]] = pattern[i]
+                taken.add(pattern[i])
+
+        return True
