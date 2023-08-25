@@ -1,0 +1,29 @@
+class Solution:
+    def containsCycle(self, grid: List[List[str]]) -> bool: 
+        n, m = len(grid), len(grid[0])
+        directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        visited = [[0]*m for _ in range(n)] 
+
+        def invalid(x, y):
+            if x<0 or y<0 or x>=n or y>=m:
+                return True
+            return False        
+
+        def dfs(x, y, prevx, prevy):  
+            visited[x][y] = 1
+            for i, j in directions:
+                nx, ny = x+i, y+j
+                if not invalid(nx, ny) and (nx, ny) != (prevx, prevy) and grid[nx][ny] == grid[x][y]:
+                    if visited[nx][ny] == 1:
+                        return True
+                    if dfs(nx, ny, x, y):  
+                        return True
+            visited[x][y] = 2  
+            return False
+
+        for i in range(n):
+            for j in range(m):
+                if visited[i][j] == 0:
+                    if dfs(i, j, -1, -1):  
+                        return True
+        return False
