@@ -1,0 +1,24 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = {i: set() for i in range(numCourses)}
+        for i, j in prerequisites:
+            graph[i].add(j)
+
+        color = [0] * numCourses
+        for i in range(numCourses):
+            if color[i] == 0:
+                stack = [i]
+                while stack:
+                    node = stack[-1]
+                    if color[node] == 0:
+                        color[node] = 1
+                        for nbr in graph[node]:
+                            if color[nbr] == 1:
+                                return False
+                            elif color[nbr] == 0:
+                                stack.append(nbr)
+                    else:
+                        color[node] = 2
+                        stack.pop()
+
+        return True
