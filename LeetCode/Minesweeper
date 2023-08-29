@@ -1,0 +1,42 @@
+class Solution:
+    def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
+
+        n, m = len(board), len(board[0])
+        directions = [(0,1), (0,-1),(1,0),(-1,0),(1,1), (-1,-1),(1,-1),(-1,1)]
+        nums = set([1, 2, 3, 4, 5, 6, 7, 8])
+
+        row, col = click
+        if board[row][col] == "M":
+            board[row][col] = "X"
+            return board
+
+        def invalid(nx, ny):
+            if nx<0 or ny<0 or nx>=n or ny>=m: 
+                return True
+            return False
+
+        def dfs(row, col):
+            stack = [(row, col)]
+            visited = set([(row, col)])
+            while stack:
+                i, j = stack.pop()
+                if board[i][j] == "E":
+                    mine = 0
+                    neighbors = []
+                    for x, y in directions:
+                        nx, ny = i+x, j+y
+                        if not invalid(nx, ny):
+                            if board[nx][ny] == "M":
+                                mine += 1
+                            if (nx, ny) not in visited and board[nx][ny] == "E":
+                                neighbors.append((nx, ny))
+                    if mine>0:
+                        board[i][j] = str(mine)
+                    else:
+                        board[i][j] = "B"
+                        for neighbor in neighbors:
+                            stack.append(neighbor)
+                            visited.add(neighbor)
+
+        dfs(row, col)
+        return board
