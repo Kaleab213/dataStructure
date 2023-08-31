@@ -1,0 +1,25 @@
+class Solution:
+    def minMutation(self, start: str, end: str, bank: List[str]) -> int:
+        visited=defaultdict(lambda:False)
+        visited[start]=True
+
+        queue=deque()
+        queue.append([start,0])
+        while queue:
+            curr,res = queue.popleft()
+
+            if curr == end:
+                return res
+            for i in range(len(bank)):
+
+                val = 0
+                for j in range(8):
+                    if curr[j]!=bank[i][j]:
+                        val+=1
+
+                if val==1:
+                    if not visited[bank[i]]:
+                        queue.append([bank[i],res+1])
+                        visited[bank[i]]=True
+                        
+        return -1
