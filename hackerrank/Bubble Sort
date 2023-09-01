@@ -1,5 +1,6 @@
 def countSwaps(a):
     numSwaps = 0
+
     for i in a:
         for j in range(len(a)):
             if j < (len(a)-1):
