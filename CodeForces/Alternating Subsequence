@@ -12,7 +12,6 @@ def subsequence():
             
         first = 0
         output = 0
-        
         for second in range(len(a)):
             if a[second] > 0 and a[first] < 0 or a[second] < 0 and a[first] > 0:
                 output+=max(a[first:second])
