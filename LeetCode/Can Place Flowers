@@ -1,0 +1,13 @@
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        val = 0
+        i = 0
+        while val<n and i<len(flowerbed):
+            if flowerbed[i]==0:
+                if i-1<0 or flowerbed[i-1]==0:
+                    if i+1>=len(flowerbed) or flowerbed[i+1]==0:
+                        flowerbed[i]=1
+                        val += 1
+            i+=1
+        return val==n
+        
