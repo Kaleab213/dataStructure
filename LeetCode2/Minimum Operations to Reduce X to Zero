@@ -1,0 +1,22 @@
+class Solution:
+    def minOperations(self, nums: List[int], x: int) -> int:
+        y = sum(nums) - x
+        n = len(nums)
+
+        left, right = 0, 0
+        curr = 0
+        res = float('inf')
+
+        while right < n:
+            curr += nums[right]
+            right += 1
+
+            while curr > y and left < right:
+                curr -= nums[left]
+                left += 1
+
+            if curr == y:
+                res = min(res, n - (right - left))
+
+        if res == float('inf'): return -1 
+        return res
