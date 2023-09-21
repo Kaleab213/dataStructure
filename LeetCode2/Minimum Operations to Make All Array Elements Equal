@@ -1,0 +1,16 @@
+class Solution:
+    def minOperations(self, nums: List[int], queries: List[int]) -> List[int]:
+        n = len(nums)
+        nums.sort()
+        ps = [0] + list(accumulate(nums))
+        splits = []
+        for query in queries:
+            idx = bisect_left(nums, query)
+            splits.append((query, idx))
+        res = []
+        for q, i in splits:
+            left_sum = q * i - ps[i]
+            right_sum = (ps[-1] - ps[i]) - q * (n - i)
+            res.append(left_sum + right_sum)
+        return res
+        
