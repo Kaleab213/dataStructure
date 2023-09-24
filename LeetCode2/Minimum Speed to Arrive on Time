@@ -1,0 +1,22 @@
+
+class Solution:
+    def minSpeedOnTime(self, dist: List[int], hour: float) -> int:
+        n = len(dist)  
+        minSpeed, maxSpeed = 1, 10**7 + 1
+        answer = -1 
+
+        while minSpeed <= maxSpeed:  
+            midSpeed = minSpeed + (maxSpeed - minSpeed) // 2  
+
+            totalHours = 0.0  
+            for i in range(n - 1):
+                totalHours += math.ceil(dist[i]/midSpeed)
+            totalHours += dist[n - 1] / midSpeed
+
+            if totalHours > hour:
+                minSpeed = midSpeed + 1
+            else:
+                answer = midSpeed
+                maxSpeed = midSpeed - 1
+
+        return answer 
