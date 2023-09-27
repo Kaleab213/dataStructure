@@ -1,0 +1,27 @@
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordList = set(wordList)
+        if endWord not in wordList:
+            return 0
+
+        nbr = defaultdict(list)
+        for word in wordList:
+            for i in range(len(word)):
+                pattern = word[:i]+"*"+word[i+1:]
+                nbr[pattern].append(word)
+
+        visited = set([beginWord])
+        queue = deque([(beginWord, 1)])
+        while queue:
+
+            curr, path = queue.popleft()
+            if curr == endWord:
+                return path
+
+            for idx in range(len(curr)):
+                pattern = curr[:idx]+"*"+curr[idx+1:]
+                for adj in nbr[pattern]:
+                    if adj not in visited:
+                        queue.append((adj, path+1))
+                        visited.add(adj)
+        return 0
