@@ -1,0 +1,18 @@
+class Solution:
+    def numFriendRequests(self, ages: List[int]) -> int:
+        n = len(ages)
+        ages.sort()
+        res = 0
+        for i in range(n):
+            val = int(ages[i]*0.5+8)
+            left = 0
+            right = n-1
+            while left <= right:
+                mid = (left+right)//2
+                if val > ages[mid]:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            end = bisect.bisect_right(ages, ages[i])-1
+            res += len(ages[left:end])
+        return res
