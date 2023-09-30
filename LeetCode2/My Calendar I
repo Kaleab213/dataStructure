@@ -1,0 +1,15 @@
+class MyCalendar:
+
+    def __init__(self):
+        self.array = []
+
+    def book(self, start: int, end: int) -> bool:
+        for i, j in self.array:
+            if start>=i and start<=j:
+                return False
+            if end-1>=i and end-1<=j:
+                return False
+            if start<i and end-1>j:
+                return False
+        self.array.append([start, end-1])
+        return True
