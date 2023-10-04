@@ -1,0 +1,28 @@
+
+t = int(input())
+for _ in range(t):
+    n, curr = input().split()
+    n = int(n)
+    light = input()
+    light += light
+    
+    res = 0
+    if curr == "g":
+        print(res)
+        continue
+    
+    curr_light = -1
+    for i in range(2*n):
+        if light[i] == "g" and curr_light != -1:
+            res = max(res, i-curr_light)
+            curr_light = -1
+        elif light[i] == curr and curr_light == -1:
+            curr_light = i
+    print(res)
+
+# 3
+# 0
+# 2
+# 4
+# 1
+# 4
