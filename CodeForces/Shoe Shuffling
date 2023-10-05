@@ -1,0 +1,58 @@
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    shoes = list(map(int, input().split()))
+    
+    my_dict = {}
+    my_set = set()
+    
+    for i in range(n):
+        num = -1
+        
+        for j in my_set:
+            if shoes[i] >= shoes[j]:
+                num = max(num, j)
+                
+        if num != -1:
+            if i in my_dict:
+                prev = i
+                val = my_dict[prev]
+                
+                while val in my_dict:
+                    if shoes[my_dict[val]] >= shoes[num]:
+                        prev = val
+                        val = my_dict[val]
+                    else:
+                        break
+                
+                if shoes[val] >= shoes[num]:
+                    my_dict[val] = num
+                    my_set.remove(num)
+                else:
+                    my_dict[num] = val
+                    my_dict[prev] = num
+                    
+            else:
+                my_dict[i] = num
+                my_set.add(num)
+                
+            my_set.remove(num)
+            
+        my_set.add(i)
+    
+    for last in my_set:
+        for i in range(n):
+            if i != last and i not in my_dict:
+                if shoes[i] >= shoes[last]:
+                    my_dict[i] = last
+                    
+    if len(my_dict) != n:
+        print(-1)
+        continue
+    
+    result = []
+    for i in range(n):
+        result.append(my_dict[i] + 1)
+    
+    print(' '.join(map(str, result)))
