@@ -1,0 +1,18 @@
+class Solution:
+    def pancakeSort(self, arr: List[int]) -> List[int]:
+        n = len(arr)
+        res = []
+        for target in range(n, 0, -1):
+            
+            target_idx = arr.index(target)
+            if target_idx == target - 1:
+                continue
+
+            if target_idx != 0:
+                arr[:target_idx + 1] = arr[:target_idx + 1][::-1]
+                res.append(target_idx + 1)
+
+            arr[:target] = arr[:target][::-1]
+            res.append(target)
+
+        return res
