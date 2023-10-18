@@ -1,0 +1,21 @@
+
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        wordl = len(words[0])
+        word_count = defaultdict(int)
+        for word in words:
+            word_count[word] += 1
+
+        res = []
+        for i in range(len(s) - len(words) * wordl + 1):
+            window_count = defaultdict(int)
+            for j in range(len(words)):
+                word = s[i + j * wordl:i + (j + 1) * wordl]
+                if word not in word_count:
+                    break
+                window_count[word] += 1
+                if window_count[word] > word_count[word]:
+                    break
+                if j == len(words) - 1:
+                    res.append(i)
+        return res
