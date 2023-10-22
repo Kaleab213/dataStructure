@@ -9,6 +9,7 @@ class Solution:
             digit_sum = carry
             if i >= 0:
                 digit_sum += int(a[i])
+
                 i -= 1
             if j >= 0:
                 digit_sum += int(b[j])
