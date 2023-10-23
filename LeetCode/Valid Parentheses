@@ -3,6 +3,7 @@ class Solution:
         newArray = []
         for i in range(len(s)):
             if s[i] == "(":
+
                 newArray.append(s[i])
             elif s[i] == "[":
                 newArray.append(s[i])
