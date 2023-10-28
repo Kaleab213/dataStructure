@@ -5,6 +5,8 @@ class Solution(object):
         value = 0
         while piles:
             value += piles[-2]
+
+
             piles.pop(-1)
             piles.pop(-2)
             piles.pop(0)
