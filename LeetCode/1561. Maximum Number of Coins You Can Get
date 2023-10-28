@@ -1,7 +1,6 @@
 class Solution(object):
 
     def maxCoins(self, piles):
-
         piles = sorted(piles)
         value = 0
         while piles:
