@@ -13,6 +13,4 @@ class Solution:
         
         for i in sum:
             output.append(int(i))
-
         return output
-
