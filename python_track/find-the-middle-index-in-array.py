@@ -1,12 +1,12 @@
 class Solution:
     def findMiddleIndex(self, nums: List[int]) -> int:
-        # if len(nums)==1:
-        #     return 0
-        # if len(nums)==2:
-        #     if nums[1]==0:
-        #         return 0
-        #     if nums[0]==0:
-        #         return 1
+        if len(nums)==1:
+            return 0
+        if len(nums)==2:
+            if nums[1]==0:
+                return 0
+            if nums[0]==0:
+                return 1
 
         total = sum(nums)
         currsum = 0
